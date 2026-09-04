@@ -13,8 +13,40 @@
   <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
   <script src="https://cdn.authing.co/packages/guard/5.1.5/guard.min.js"></script>
 </head>
-<body>
+<body class="landing-mode auth-checking">
   <div class="grain"></div>
+  <div class="landing" id="landing">
+    <header class="landing-nav">
+      <a class="landing-logo" href="#welcome" aria-label="知页首页"><span>知</span><strong>知页</strong></a>
+      <nav><a href="#welcome">首页</a><a href="#features">特色</a><a href="#signin">登录与注册</a></nav>
+      <button class="landing-login-link" id="landingLoginBtn">开启阅读</button>
+    </header>
+    <section class="landing-hero" id="welcome">
+      <div class="landing-shade"></div>
+      <div class="landing-copy">
+        <p class="landing-kicker">ZHIYE · YOUR QUIET LIBRARY</p>
+        <h1>让每一次阅读，<br><em>都抵达更辽阔的自己。</em></h1>
+        <p class="landing-intro">多元化的知识图谱，个性化的阅读路径。把论文、书籍与灵感安放在一处，慢下来，听见思想生长的声音。</p>
+        <div class="landing-actions"><button class="landing-primary" id="startReadingBtn">进入知页</button><a href="#features">了解知页 <span>↓</span></a></div>
+        <div class="landing-traits"><span><b>多元化</b>跨学科文献与自由标签</span><span><b>个性化</b>只属于你的阅读空间</span><span><b>沉浸式</b>专注、笔记与进度相伴</span></div>
+      </div>
+      <div class="landing-scroll"><i></i><span>向下，开启一页新知</span></div>
+    </section>
+    <section class="landing-auth-page" id="signin">
+      <div class="auth-page-story" id="features">
+        <p class="landing-kicker">A LIBRARY THAT KNOWS YOU</p>
+        <h2>万千知识，<br>依你的方式相遇。</h2>
+        <p>从学术论文到随手收藏，从预设学科到自定义主题。知页尊重每一种好奇，也记得每一段阅读旅程。</p>
+        <div class="feature-list"><article><span>01</span><div><b>多元知识入口</b><small>本地文献、网页资料与知网检索，在同一空间汇聚。</small></div></article><article><span>02</span><div><b>个性阅读秩序</b><small>自定义标签、笔记与进度，让知识按照你的逻辑生长。</small></div></article><article><span>03</span><div><b>安心私密存储</b><small>自主选择本地存储位置，阅读资料始终由你掌控。</small></div></article></div>
+      </div>
+      <div class="landing-auth-wrap">
+        <div class="landing-auth-heading"><span class="mini-logo">知</span><div><p>欢迎来到知页</p><h2>登录或创建你的阅读空间</h2></div></div>
+        <div id="landingAuthContainer"><div class="auth-loading"><span></span><strong>正在准备安全登录</strong><small>手机号验证 · 无需记忆密码</small></div></div>
+        <div class="auth-fallback" id="landingAuthFallback" hidden><p>登录组件暂时无法加载</p><a href="https://zhiye-library.authing.cn/login?app_id=6a9ab9e9c4d642629f1b0c76" target="_blank" rel="noopener noreferrer">打开安全登录页 →</a></div>
+        <p class="landing-auth-note">登录后即进入个人工作台。验证码仅用于身份验证，知页不会保存。</p>
+      </div>
+    </section>
+  </div>
   <aside class="sidebar" id="sidebar">
     <a class="brand" href="#"><span>知</span><strong>知页</strong></a>
     <nav>

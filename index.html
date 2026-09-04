@@ -9,7 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.authing.co/packages/guard/5.1.5/guard.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+  <script src="https://cdn.authing.co/packages/guard/5.1.5/guard.min.js"></script>
 </head>
 <body>
   <div class="grain"></div>
@@ -27,7 +29,7 @@
         <div class="progress"><i style="width:68%"></i></div>
         <small>已阅读 204 / 300 分钟</small>
       </div>
-      <button class="user-card"><span class="avatar">Y</span><span><b>研究者</b><small>个人空间</small></span><em>···</em></button>
+      <button class="user-card" id="userCard"><span class="avatar" id="userAvatar">游</span><span><b id="userName">游客预览</b><small id="userHint">点击手机号登录</small></span><em>···</em></button>
     </div>
   </aside>
 
@@ -73,6 +75,7 @@
 
   <div class="modal" id="addModal" aria-hidden="true"><div class="modal-box"><button class="close" id="closeModal">×</button><p class="eyebrow">PERSONAL LIBRARY</p><h2>保存到我的文献库</h2><div class="source-tabs"><button class="active" data-source="file">本地文件</button><button data-source="url">网页链接</button></div><div id="fileFields"><label class="file-picker">选择 PDF、Word 或文本文件<input id="documentFile" type="file" accept=".pdf,.doc,.docx,.txt,.md,.rtf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label></div><div id="urlFields" hidden><label>文献网址<input id="documentUrl" type="url" placeholder="https://…" /></label></div><label>文献标题<input id="newTitle" placeholder="默认使用文件名或网页地址" /></label><label>作者<input id="newAuthor" placeholder="作者或机构（选填）" /></label><label>研究主题<select id="newTag"><option>人工智能</option><option>人机交互</option><option>认知科学</option><option>研究方法</option><option>其他</option></select></label><button class="primary-btn full" id="confirmAdd">保存到文献库</button></div></div>
   <div class="reader-modal" id="readerModal" aria-hidden="true"><div class="reader-shell"><header><div><small id="readerType">DOCUMENT</small><h2 id="readerTitle">文献阅读</h2></div><div><button id="readerExternal" hidden>在新窗口打开 ↗</button><button class="reader-close" id="closeReader">×</button></div></header><main id="readerContent"></main></div></div>
+  <div class="modal" id="profileModal" aria-hidden="true"><div class="modal-box profile-box"><button class="close" id="closeProfile">×</button><p class="eyebrow">PERSONAL SPACE</p><div class="profile-avatar" id="profileAvatar">知</div><h2 id="profileName">我的个人空间</h2><p class="profile-phone" id="profilePhone"></p><div class="profile-status"><span>账号状态</span><b>● 已安全登录</b></div><div class="profile-info"><div><small>我的文献</small><strong id="profileDocCount">0</strong></div><div><small>存储位置</small><strong>本设备</strong></div></div><p class="profile-note">当前文献和笔记保存在此浏览器中。云端跨设备同步将在后续版本开放。</p><button class="logout-btn" id="logoutBtn">退出登录</button></div></div>
   <div class="toast" id="toast">已保存</div>
   <script src="app.js"></script>
 </body>

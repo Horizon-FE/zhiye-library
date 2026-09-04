@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="知页——专注阅读、整理与理解学术文献的个人学习空间。" />
+  <title>知页 · 文献学习空间</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#"><span>知</span><strong>知页</strong></a>
+    <nav>
+      <a class="nav-link active" href="#dashboard" data-page="dashboard"><i>⌂</i>今日学习</a>
+      <a class="nav-link" href="#library" data-page="library"><i>□</i>我的文献</a>
+      <a class="nav-link" href="#notes" data-page="notes"><i>◇</i>阅读笔记</a>
+      <a class="nav-link" href="#progress" data-page="progress"><i>◔</i>学习进度</a>
+    </nav>
+    <div class="side-bottom">
+      <div class="weekly-mini">
+        <div><span>本周目标</span><b>68%</b></div>
+        <div class="progress"><i style="width:68%"></i></div>
+        <small>已阅读 204 / 300 分钟</small>
+      </div>
+      <button class="user-card"><span class="avatar">Y</span><span><b>研究者</b><small>个人空间</small></span><em>···</em></button>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="打开菜单">☰</button>
+      <div class="search"><span>⌕</span><input id="globalSearch" placeholder="搜索标题、作者或关键词…" /><kbd>⌘ K</kbd></div>
+      <div class="header-actions"><button class="icon-btn" id="themeBtn" aria-label="切换主题">◐</button><button class="icon-btn notification" aria-label="通知">♢</button><button class="primary-btn" id="addBtn"><span>＋</span> 添加文献</button></div>
+    </header>
+
+    <section class="page active" id="dashboard">
+      <div class="hero-heading">
+        <div><p class="eyebrow">2026 年 9 月 4 日 · 星期五</p><h1>下午好，继续探索<span>知识的边界。</span></h1><p>你本周保持了 4 天学习，距离目标还差 96 分钟。</p></div>
+        <div class="streak"><span>连续学习</span><strong>12<small>天</small></strong><div>🔥 最长记录 18 天</div></div>
+      </div>
+
+      <div class="section-head"><div><h2>继续阅读</h2><p>从上次停下的位置继续</p></div><a href="#library" class="view-all">查看全部 →</a></div>
+      <div class="continue-grid" id="continueGrid"></div>
+
+      <div class="content-grid">
+        <section>
+          <div class="section-head"><div><h2>近期文献</h2><p>你的研究资料库</p></div><div class="filter-tabs"><button class="active" data-filter="all">全部</button><button data-filter="reading">在读</button><button data-filter="unread">待读</button></div></div>
+          <div class="paper-list" id="paperList"></div>
+        </section>
+        <aside class="right-column">
+          <div class="focus-card">
+            <div class="section-head compact"><div><h2>专注时刻</h2><p>沉浸式阅读计时</p></div><span>◎</span></div>
+            <div class="timer" id="timer">25:00</div>
+            <div class="timer-label">今日已专注 48 分钟</div>
+            <button class="focus-btn" id="focusBtn">开始专注</button>
+          </div>
+          <div class="quote-card"><span>“</span><blockquote>阅读不是为了记住一切，而是为了在需要时，知道去哪里寻找。</blockquote><small>— Umberto Eco</small></div>
+          <div class="tags-card"><div class="section-head compact"><h2>研究主题</h2><button>管理</button></div><div class="tag-cloud"><span>人工智能 <b>12</b></span><span>人机交互 <b>8</b></span><span>认知科学 <b>6</b></span><span>教育技术 <b>5</b></span><span>研究方法 <b>4</b></span></div></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="library"><div class="page-title"><p class="eyebrow">LIBRARY</p><h1>我的文献</h1><p>集中管理、筛选和回顾你的研究资料。</p></div><div class="library-toolbar"><div class="filter-tabs"><button class="active" data-library="all">全部文献</button><button data-library="reading">正在阅读</button><button data-library="done">已完成</button><button data-library="favorite">已收藏</button></div><span id="paperCount"></span></div><div class="library-grid" id="libraryGrid"></div></section>
+    <section class="page" id="notes"><div class="page-title"><p class="eyebrow">NOTES</p><h1>阅读笔记</h1><p>写下理解，让零散观点连成知识网络。</p></div><div class="notes-layout"><div class="note-editor"><input id="noteTitle" placeholder="笔记标题" value="关于技术与人的关系"/><textarea id="noteBody" placeholder="开始记录你的想法…">技术不只是工具，也是塑造我们注意力、行为与社会关系的环境。阅读时，应不断追问：这项技术让什么变得可能，又让什么变得不可见？</textarea><div><span id="saveStatus">已自动保存</span><button id="saveNote">保存笔记</button></div></div><div class="note-list"><h2>最近笔记</h2><article><small>2 小时前 · 人机交互</small><h3>设计中的“可供性”</h3><p>可供性存在于行动者与环境之间的关系中……</p></article><article><small>昨天 · 研究方法</small><h3>如何提出一个好问题</h3><p>问题的价值不只取决于答案，也取决于它打开了哪些路径。</p></article><article><small>9 月 1 日 · 人工智能</small><h3>大模型与知识工作</h3><p>自动化真正改变的是任务边界，而非简单替代职业。</p></article></div></div></section>
+    <section class="page" id="progress"><div class="page-title"><p class="eyebrow">PROGRESS</p><h1>学习进度</h1><p>看见每一次阅读累积的力量。</p></div><div class="stats-row"><div><span>本周阅读</span><strong>204<small> 分钟</small></strong><em>↑ 18%</em></div><div><span>完成文献</span><strong>6<small> 篇</small></strong><em>本月</em></div><div><span>新增笔记</span><strong>23<small> 条</small></strong><em>↑ 8%</em></div><div><span>阅读字数</span><strong>4.8<small> 万</small></strong><em>本月</em></div></div><div class="chart-card"><div class="section-head"><div><h2>本周学习趋势</h2><p>每日专注时长（分钟）</p></div><b>目标 300 分钟</b></div><div class="chart" id="chart"></div></div></section>
+  </main>
+
+  <div class="modal" id="addModal" aria-hidden="true"><div class="modal-box"><button class="close" id="closeModal">×</button><p class="eyebrow">NEW PAPER</p><h2>添加一篇文献</h2><label>文献标题<input id="newTitle" placeholder="输入标题" /></label><label>作者<input id="newAuthor" placeholder="作者或机构" /></label><label>研究主题<select id="newTag"><option>人工智能</option><option>人机交互</option><option>认知科学</option><option>研究方法</option></select></label><button class="primary-btn full" id="confirmAdd">添加到文献库</button></div></div>
+  <div class="toast" id="toast">已保存</div>
+  <script src="app.js"></script>
+</body>
+</html>

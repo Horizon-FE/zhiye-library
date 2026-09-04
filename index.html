@@ -34,7 +34,7 @@
     <header class="topbar">
       <button class="menu-btn" id="menuBtn" aria-label="打开菜单">☰</button>
       <div class="search"><span>⌕</span><input id="globalSearch" placeholder="搜索标题、作者或关键词…" /><kbd>⌘ K</kbd></div>
-      <div class="header-actions"><button class="icon-btn" id="themeBtn" aria-label="切换主题">◐</button><button class="icon-btn notification" aria-label="通知">♢</button><button class="primary-btn" id="addBtn"><span>＋</span> 添加文献</button></div>
+      <div class="header-actions"><button class="icon-btn" id="themeBtn" aria-label="切换主题">◐</button><button class="icon-btn notification" aria-label="通知">♢</button><button class="cnki-btn" id="cnkiBtn" title="在中国知网检索当前关键词"><b>CNKI</b> 知网检索 ↗</button><button class="primary-btn" id="addBtn"><span>＋</span> 添加文献</button></div>
     </header>
 
     <section class="page active" id="dashboard">
@@ -43,6 +43,7 @@
         <div class="streak"><span>连续学习</span><strong>12<small>天</small></strong><div>🔥 最长记录 18 天</div></div>
       </div>
 
+      <div class="cnki-banner"><div class="cnki-mark">CNKI</div><div><strong>已接入中国知网检索</strong><p>在顶部输入主题、作者或篇名，点击“知网检索”即可前往中国知网查看题录与可用全文。</p></div><button id="cnkiAdvanced">高级检索 ↗</button></div>
       <div class="section-head"><div><h2>继续阅读</h2><p>从上次停下的位置继续</p></div><a href="#library" class="view-all">查看全部 →</a></div>
       <div class="continue-grid" id="continueGrid"></div>
 

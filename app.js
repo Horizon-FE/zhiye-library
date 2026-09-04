@@ -23,7 +23,8 @@ $$('.nav-link').forEach(a=>a.onclick=()=>{let id=a.dataset.page;$$('.nav-link').
 $('.view-all').onclick=e=>{$('.nav-link[data-page="library"]').click()};
 $$('[data-filter]').forEach(b=>b.onclick=()=>{$$('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderRows(b.dataset.filter)});
 let currentLibrary='all';$$('[data-library]').forEach(b=>b.onclick=()=>{$$('[data-library]').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentLibrary=b.dataset.library;renderLibrary(currentLibrary,$('#globalSearch').value)});
-$('#globalSearch').oninput=e=>{renderLibrary(currentLibrary,e.target.value);if(e.target.value){$('.nav-link[data-page="library"]').click()}};
+$('#globalSearch').oninput=e=>renderLibrary(currentLibrary,e.target.value);
+$('#globalSearch').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();$('.nav-link[data-page="library"]').click()}});
 document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();$('#globalSearch').focus()}if(e.key==='Escape')$('#addModal').classList.remove('open')});
 $('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');$('#themeBtn').onclick=()=>document.body.classList.toggle('dark');
 $('#cnkiBtn').onclick=()=>openCnki();$('#cnkiAdvanced').onclick=()=>window.open('https://kns.cnki.net/kns8s/AdvSearch','_blank','noopener,noreferrer');

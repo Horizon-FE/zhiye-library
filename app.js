@@ -16,6 +16,7 @@ function renderRows(filter='all'){ $('#paperList').innerHTML=rows(filter) }
 function toggleFavorite(id){let p=papers.find(x=>x.id===id);p.favorite=!p.favorite;renderLibrary(currentLibrary,$('#globalSearch').value);toast(p.favorite?'已收藏':'已取消收藏')}
 function advance(id){let p=papers.find(x=>x.id===id);p.progress=Math.min(100,p.progress+4);if(p.progress===100)p.status='done';renderContinue();renderRows();toast(`阅读进度已更新至 ${p.progress}%`)}
 function toast(msg){let t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function openCnki(query){const keyword=(query||$('#globalSearch').value).trim();if(!keyword){$('#globalSearch').focus();return toast('请先输入知网检索关键词')}const url=`https://kns.cnki.net/kns8s/defaultresult/index?crossids=YSTT4HG0%2CLSTPFHG2%2CIPFD9Y60&korder=SU&kw=${encodeURIComponent(keyword)}`;window.open(url,'_blank','noopener,noreferrer')}
 renderContinue();renderRows();renderLibrary();
 
 $$('.nav-link').forEach(a=>a.onclick=()=>{let id=a.dataset.page;$$('.nav-link').forEach(x=>x.classList.toggle('active',x===a));$$('.page').forEach(x=>x.classList.toggle('active',x.id===id));$('#sidebar').classList.remove('open');window.scrollTo(0,0)});
@@ -25,6 +26,7 @@ let currentLibrary='all';$$('[data-library]').forEach(b=>b.onclick=()=>{$$('[dat
 $('#globalSearch').oninput=e=>{renderLibrary(currentLibrary,e.target.value);if(e.target.value){$('.nav-link[data-page="library"]').click()}};
 document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();$('#globalSearch').focus()}if(e.key==='Escape')$('#addModal').classList.remove('open')});
 $('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');$('#themeBtn').onclick=()=>document.body.classList.toggle('dark');
+$('#cnkiBtn').onclick=()=>openCnki();$('#cnkiAdvanced').onclick=()=>window.open('https://kns.cnki.net/kns8s/AdvSearch','_blank','noopener,noreferrer');
 $('#addBtn').onclick=()=>$('#addModal').classList.add('open');$('#closeModal').onclick=()=>$('#addModal').classList.remove('open');$('#addModal').onclick=e=>{if(e.target.id==='addModal')e.currentTarget.classList.remove('open')};
 $('#confirmAdd').onclick=()=>{let title=$('#newTitle').value.trim();if(!title)return toast('请填写文献标题');papers.unshift({id:Date.now(),title,author:$('#newAuthor').value.trim()||'未知作者',tag:$('#newTag').value,status:'unread',progress:0,color:'#496b5a',favorite:false});renderRows();renderLibrary();$('#addModal').classList.remove('open');$('#newTitle').value='';$('#newAuthor').value='';toast('文献已添加')};
 $('#saveNote').onclick=()=>{localStorage.setItem('zhiye-note',JSON.stringify({title:$('#noteTitle').value,body:$('#noteBody').value}));$('#saveStatus').textContent='刚刚保存';toast('笔记已保存到本地')};

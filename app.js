@@ -46,6 +46,23 @@ async function removeDocument(id){return documentStore('readwrite',{method:'dele
 function readableSize(bytes){if(!bytes)return '';const units=['B','KB','MB','GB'];const level=Math.min(Math.floor(Math.log(bytes)/Math.log(1024)),3);return `${(bytes/1024**level).toFixed(level?1:0)} ${units[level]}`}
 async function renderUploaded(){const docs=(await getDocuments()).sort((a,b)=>b.createdAt-a.createdAt);$('#uploadedGrid').innerHTML=docs.length?docs.map(doc=>`<article class="library-card document-card" onclick="openUploaded('${doc.id}')"><div class="paper-icon" style="background:#365f4a20;color:#365f4a">${doc.source==='url'?'↗':'文'}</div><span class="category">${safeText(doc.type)}</span><h3>${safeText(doc.title)}</h3><p>${safeText(doc.author||'未填写作者')} ${doc.size?'· '+readableSize(doc.size):''}</p><footer><span class="status unread">${doc.source==='url'?'网页文献':'本地文件'}</span><div class="doc-actions"><button class="delete-doc" onclick="event.stopPropagation();deleteUploaded('${doc.id}')">删除</button><button>阅读 →</button></div></footer></article>`).join(''):'<div class="empty-library">还没有上传文献。把 PDF 或 Word 文件拖到上方即可开始。</div>'}
 async function addFiles(files){for(const file of files){await putDocument({id:`doc-${Date.now()}-${crypto.randomUUID?.()||Math.random()}`,source:'file',title:file.name.replace(/\.[^.]+$/,''),author:'',tag:'其他',type:fileKind(file.name),fileName:file.name,mime:file.type,size:file.size,blob:file,createdAt:Date.now()})}await renderUploaded();toast(`已保存 ${files.length} 个文件到本地文献库`)}
+const tagGroups={
+  '计算机与工程':['人工智能','计算机科学','数据科学','软件工程','网络与信息安全','电子与通信','机械工程','土木与建筑','能源与环境工程'],
+  '自然科学':['数学','物理学','化学','天文学','地球科学','生命科学','生态与环境'],
+  '医学与健康':['基础医学','临床医学','公共卫生','药学','心理与精神健康','运动与健康'],
+  '社会科学':['经济与金融','管理学','社会学','法学','政治与国际关系','教育学','传播与媒体','人类学'],
+  '人文与艺术':['哲学','历史','文学','语言学','艺术与设计','宗教与文化'],
+  '交叉与方法':['认知科学','人机交互','研究方法','统计与计量','科学技术与社会','数字人文'],
+  '书籍类型':['学术专著','教材与教辅','工具书','科普读物','传记','小说','诗歌与散文','商业与自我发展']
+};
+const tagSelect=$('#newTag');
+const savedCustomTags=()=>{try{return JSON.parse(localStorage.getItem('zhiye-custom-tags'))||[]}catch(error){return []}};
+function buildTagOptions(){const current=tagSelect.value;tagSelect.innerHTML=Object.entries(tagGroups).map(([group,tags])=>`<optgroup label="${group}">${tags.map(tag=>`<option value="${tag}">${tag}</option>`).join('')}</optgroup>`).join('')+`<optgroup label="我的标签">${savedCustomTags().map(tag=>`<option value="${safeText(tag)}">${safeText(tag)}</option>`).join('')}</optgroup><option value="__custom__">＋ 创建自定义标签…</option>`;if([...tagSelect.options].some(option=>option.value===current))tagSelect.value=current}
+buildTagOptions();
+tagSelect.insertAdjacentHTML('afterend','<input id="customTagInput" class="custom-tag-input" maxlength="24" placeholder="输入自定义标签名称" hidden>');
+const customTagInput=$('#customTagInput');
+tagSelect.addEventListener('change',()=>{customTagInput.hidden=tagSelect.value!=='__custom__';if(!customTagInput.hidden)setTimeout(()=>customTagInput.focus(),0)});
+$('#confirmAdd').addEventListener('click',event=>{if(tagSelect.value!=='__custom__')return;const custom=customTagInput.value.trim();if(!custom){event.preventDefault();event.stopImmediatePropagation();return toast('请为自定义标签命名')}const tags=[...new Set([...savedCustomTags(),custom])];localStorage.setItem('zhiye-custom-tags',JSON.stringify(tags));const option=new Option(custom,custom,true,true);tagSelect.add(option,tagSelect.lastElementChild);customTagInput.hidden=true;customTagInput.value=''},true);
 let sourceMode='file';
 $$('[data-source]').forEach(button=>button.onclick=()=>{sourceMode=button.dataset.source;$$('[data-source]').forEach(item=>item.classList.toggle('active',item===button));$('#fileFields').hidden=sourceMode!=='file';$('#urlFields').hidden=sourceMode!=='url';$('#newTitle').value=''});
 $('#documentFile').onchange=e=>{if(e.target.files[0]&&!$('#newTitle').value)$('#newTitle').value=e.target.files[0].name.replace(/\.[^.]+$/,'')};

@@ -38,3 +38,7 @@ body.landing-mode{background:#f5f2e9}.landing{min-height:200vh;background:#f5f2e
 @media(max-width:600px){.landing-auth-wrap .authing-ant-row:has(>.g2-send-code-input-col){gap:8px!important}.landing-auth-wrap .authing-ant-row:has(>.g2-send-code-input-col)>.g2-send-code-input-col{width:calc(100% - 120px)!important;max-width:calc(100% - 120px)!important;min-width:165px!important}.landing-auth-wrap .authing-ant-row:has(>.g2-send-code-input-col)>.authing-ant-col:not(.g2-send-code-input-col){flex-basis:112px!important;width:112px!important;max-width:112px!important;min-width:112px!important}}
 /* Align the verification row with the phone and login fields. */
 .landing-auth-wrap .authing-ant-row:has(.authing-g2-send-code-btn),.landing-auth-wrap .authing-ant-row:has(>.g2-send-code-input-col){margin-left:0!important;margin-right:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+/* Balance the centered feature navigation and the top-right reading action. */
+.landing-nav nav{position:absolute!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;margin:0!important;gap:38px!important;white-space:nowrap}.landing-nav{padding-right:190px!important}.landing-login-link{min-width:124px;text-align:center}
+@media(max-width:1000px){.landing-nav nav{display:none!important}.landing-nav{padding-right:170px!important}}
+@media(max-width:600px){.landing-nav{padding-right:130px!important}.landing-login-link{min-width:106px}}

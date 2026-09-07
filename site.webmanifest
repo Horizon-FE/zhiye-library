@@ -1,0 +1,11 @@
+{
+  "name": "知页 · 文献学习空间",
+  "short_name": "知页",
+  "description": "专注阅读、整理与理解学术文献的个人学习空间。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f3ed",
+  "theme_color": "#315f49",
+  "icons": [{"src":"assets/zhiye-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
